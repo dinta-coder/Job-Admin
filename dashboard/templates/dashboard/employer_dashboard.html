@@ -1,0 +1,22 @@
+<!-- templates/dashboard/employer_dashboard.html -->
+{% extends 'base.html' %}
+{% block content %}
+  <h2>My Posted Jobs</h2>
+  <a class="btn btn-success mb-2" href="{% url 'create_job' %}">Post New Job</a>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th><th>Applications</th><th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for job in jobs %}
+        <tr>
+          <td>{{ job.title }}</td>
+          <td>{{ job.application_set.count }}</td>
+          <td>{{ job.is_active|yesno:"Active,Inactive" }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

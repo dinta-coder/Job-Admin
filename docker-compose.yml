@@ -1,0 +1,27 @@
+# docker-compose.yml
+version: '3.9'
+
+services:
+  web:
+    build: .
+    command: gunicorn jobportal.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: jobportal
+      POSTGRES_USER: jobadmin
+      POSTGRES_PASSWORD: password
+
+volumes:
+  postgres_data:
