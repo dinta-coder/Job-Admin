@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: django-jobportal
+    env: docker
+    region: oregon
+    plan: free
+    dockerContext: .
+    dockerfilePath: Dockerfile
+    envVars:
+      - key: SECRET_KEY
+        value: your-secret-key
+      - key: DEBUG
+        value: 0
+      - key: DATABASE_URL
+        value: postgres://<user>:<password>@<host>:5432/<db>
